@@ -1,9 +1,8 @@
 public class OX {
     private String[][] table = {
-            {" " ,"0" ,"1" ,"2"} ,
-            {"0" ,"-" ,"-" ,"-"} ,
-            {"1" ,"-" ,"-" ,"-"} ,
-            {"2" ,"-" ,"-" ,"-"} ,
+            {"-" ,"-" ,"-"} ,
+            {"-" ,"-" ,"-"} ,
+            {"-" ,"-" ,"-"} ,
     };
     private String player;
     private int countX;
@@ -20,9 +19,17 @@ public class OX {
 
     public String getTableString() {
         String result="";
-        for( int row=0; row<table.length; row++ ) {
-            for( int col=0; col<table[row].length; col++ ) {
-                result = result + table[row][col];
+        for( int row=0; row<4; row++ ) {
+            for( int col=0; col<4; col++ ) {
+                if(col==0 && row==0) {
+                    result=" ";
+                } else if(row==0) {
+                    result+=(col-1);
+                } else if(col==0) {
+                    result+=(row-1);
+                } else {
+                    result = result + table[row - 1][col - 1];
+                }
             }
             result = result + "\n";
         }
@@ -46,10 +53,10 @@ public class OX {
     }
 
     public boolean put(int col, int row) {
-        if(!table[row+1][col+1].equals("-")) {
+        if(!table[row][col].equals("-")) {
             return false;
         }
-        table[row+1][col+1] = getCurrentPlayer();
+        table[row][col] = getCurrentPlayer();
         turnCount++;
         return true;
     }
@@ -72,7 +79,7 @@ public class OX {
          */
         boolean checkCol = true;
         for( int i=0; i<3; i++) {
-            if( !table[i+1][col+1].equals(getCurrentPlayer()) ) {
+            if( !table[i][col].equals(getCurrentPlayer()) ) {
                 checkCol = false;
                 break;
 
@@ -88,7 +95,7 @@ public class OX {
          */
         boolean checkRow = true;
         for( int i=0; i<3; i++) {
-            if (!table[row + 1][i + 1].equals(getCurrentPlayer())) {
+            if (!table[row][i].equals(getCurrentPlayer())) {
                 checkRow = false;
                 break;
             }
@@ -99,7 +106,7 @@ public class OX {
 
         boolean checkDiagEw = true;
         for(int i=0; i<3; i++) {
-            if (!table[i + 1][i + 1].equals(getCurrentPlayer())) {
+            if (!table[i][i].equals(getCurrentPlayer())) {
                 checkDiagEw = false;
                 break;
             }
@@ -111,7 +118,7 @@ public class OX {
 
         boolean checkDiagSw = true;
         for(int i=0; i<3; i++) {
-            if (!table[3-i][i + 1].equals(getCurrentPlayer())) {
+            if (!table[2-i][i].equals(getCurrentPlayer())) {
                 checkDiagSw = false;
                 break;
             }
