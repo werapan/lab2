@@ -73,22 +73,45 @@ public class OX {
         return table[row+1][col+1];
     }
     public boolean checkWin(int col, int row) {
+        if (checkCol(col)) return true;
 
-        /*
-         * Check col
-         */
-        boolean checkCol = true;
-        for( int i=0; i<3; i++) {
-            if( !table[i][col].equals(getCurrentPlayer()) ) {
-                checkCol = false;
+        if (checkRow(row)) return true;
+
+        if (checkDiagEw()) return true;
+
+        if (checkDiagSw()) return true;
+        return false;
+    }
+
+    private boolean checkDiagSw() {
+        boolean checkDiagSw = true;
+        for(int i=0; i<3; i++) {
+            if (!table[2-i][i].equals(getCurrentPlayer())) {
+                checkDiagSw = false;
                 break;
-
             }
         }
-        if(checkCol) {
+        if(checkDiagSw) {
             return true;
         }
+        return false;
+    }
 
+    private boolean checkDiagEw() {
+        boolean checkDiagEw = true;
+        for(int i=0; i<3; i++) {
+            if (!table[i][i].equals(getCurrentPlayer())) {
+                checkDiagEw = false;
+                break;
+            }
+        }
+        if(checkDiagEw) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkRow(int row) {
 
         /*
          * Check row
@@ -103,27 +126,22 @@ public class OX {
         if(checkRow) {
             return true;
         }
+        return false;
+    }
 
-        boolean checkDiagEw = true;
-        for(int i=0; i<3; i++) {
-            if (!table[i][i].equals(getCurrentPlayer())) {
-                checkDiagEw = false;
+    private boolean checkCol(int col) {
+        /*
+         * Check col
+         */
+        boolean checkCol = true;
+        for( int i=0; i<3; i++) {
+            if( !table[i][col].equals(getCurrentPlayer()) ) {
+                checkCol = false;
                 break;
+
             }
         }
-        if(checkDiagEw) {
-            return true;
-        }
-
-
-        boolean checkDiagSw = true;
-        for(int i=0; i<3; i++) {
-            if (!table[2-i][i].equals(getCurrentPlayer())) {
-                checkDiagSw = false;
-                break;
-            }
-        }
-        if(checkDiagSw) {
+        if(checkCol) {
             return true;
         }
         return false;
