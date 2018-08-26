@@ -47,7 +47,7 @@ class OXTest {
     }
 
     @Test
-    void checkWin1() {
+    void checkWinCol0() {
         OX ox = new OX();
         ox.put(0,0);
         ox.put(0,1);
@@ -60,7 +60,7 @@ class OXTest {
 
 
     @Test
-    void checkWin2() {
+    void checkNoWinCol0() {
         OX ox = new OX();
         ox.put(0,0);
         ox.put(0,1);
@@ -71,7 +71,7 @@ class OXTest {
     }
 
     @Test
-    void checkWin3() {
+    void checkWinCol1() {
         OX ox = new OX();
         ox.put(1,0);
         ox.put(1,1);
@@ -84,7 +84,7 @@ class OXTest {
 
 
     @Test
-    void checkWin4() {
+    void checkWinRow0() {
         OX ox = new OX();
         ox.put(0,0);
         ox.put(1,0);
@@ -96,7 +96,7 @@ class OXTest {
     }
 
     @Test
-    void checkWin5() {
+    void checkWinDiagES() {
         OX ox = new OX();
         ox.put(0,0);
         ox.put(1,1);
@@ -108,37 +108,23 @@ class OXTest {
     }
 
     @Test
-    void checkWin6() {
+    void checkWinDiagWS() {
         OX ox = new OX();
-        ox.put(0,0);
+        ox.put(2,0);
         ox.put(1,1);
-        ox.put(2,2);
-        assertEquals(" 012\n0X--\n1-X-\n2--X\n",ox.getTableString());
+        ox.put(0,2);
+        assertEquals(" 012\n0--X\n1-X-\n2X--\n",ox.getTableString());
         assertTrue(ox.checkWin(0, 0));
         assertTrue(ox.checkWin(1, 1));
         assertTrue(ox.checkWin(2, 2));
     }
 
     @Test
-    void checkWin7() {
+    void getTurnCount() {
         OX ox = new OX();
         ox.put(0,0);
         ox.put(1,1);
         ox.put(2,2);
-        assertEquals(" 012\n0X--\n1-X-\n2--X\n",ox.getTableString());
-        assertTrue(ox.checkWin(0, 0));
-        assertTrue(ox.checkWin(1, 1));
-        assertTrue(ox.checkWin(2, 2));
-    }
-    @Test
-    void checkWin8() {
-        OX ox = new OX();
-        ox.put(0,0);
-        ox.put(1,1);
-        ox.put(2,2);
-        assertEquals(" 012\n0X--\n1-X-\n2--X\n",ox.getTableString());
-        assertTrue(ox.checkWin(0, 0));
-        assertTrue(ox.checkWin(1, 1));
-        assertTrue(ox.checkWin(2, 2));
+        assertEquals(3,ox.getTurnCount());
     }
 }

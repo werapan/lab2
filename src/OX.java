@@ -9,6 +9,7 @@ public class OX {
     private int countX;
     private int countO;
     private int countDraw;
+    private int turnCount;
 
     public OX() {
         player = "X";
@@ -49,6 +50,7 @@ public class OX {
             return false;
         }
         table[row+1][col+1] = getCurrentPlayer();
+        turnCount++;
         return true;
     }
 
@@ -60,13 +62,15 @@ public class OX {
         }
     }
 
+    public String get(int col, int row) {
+        return table[row+1][col+1];
+    }
     public boolean checkWin(int col, int row) {
-        boolean checkCol = true;
-        boolean checkRow = true;
 
         /*
          * Check col
          */
+        boolean checkCol = true;
         for( int i=0; i<3; i++) {
             if( !table[i+1][col+1].equals(getCurrentPlayer()) ) {
                 checkCol = false;
@@ -82,6 +86,7 @@ public class OX {
         /*
          * Check row
          */
+        boolean checkRow = true;
         for( int i=0; i<3; i++) {
             if (!table[row + 1][i + 1].equals(getCurrentPlayer())) {
                 checkRow = false;
@@ -92,7 +97,33 @@ public class OX {
             return true;
         }
 
+        boolean checkDiagEw = true;
+        for(int i=0; i<3; i++) {
+            if (!table[i + 1][i + 1].equals(getCurrentPlayer())) {
+                checkDiagEw = false;
+                break;
+            }
+        }
+        if(checkDiagEw) {
+            return true;
+        }
 
+
+        boolean checkDiagSw = true;
+        for(int i=0; i<3; i++) {
+            if (!table[3-i][i + 1].equals(getCurrentPlayer())) {
+                checkDiagSw = false;
+                break;
+            }
+        }
+        if(checkDiagSw) {
+            return true;
+        }
         return false;
+    }
+
+
+    public int getTurnCount() {
+        return turnCount;
     }
 }
