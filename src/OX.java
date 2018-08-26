@@ -61,13 +61,38 @@ public class OX {
     }
 
     public boolean checkWin(int col, int row) {
+        boolean checkCol = true;
+        boolean checkRow = true;
 
+        /*
+         * Check col
+         */
         for( int i=0; i<3; i++) {
             if( !table[i+1][col+1].equals(getCurrentPlayer()) ) {
-                return false;
+                checkCol = false;
+                break;
+
             }
         }
+        if(checkCol) {
+            return true;
+        }
 
-        return true;
+
+        /*
+         * Check row
+         */
+        for( int i=0; i<3; i++) {
+            if (!table[row + 1][i + 1].equals(getCurrentPlayer())) {
+                checkRow = false;
+                break;
+            }
+        }
+        if(checkRow) {
+            return true;
+        }
+
+
+        return false;
     }
 }
